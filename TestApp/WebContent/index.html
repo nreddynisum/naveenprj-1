@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html >
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+<script src="Scripts/myscripts.js"></script>
+</head>
+<body ng-app="myModule" >
+
+
+<div ng-controller="myCtrl">
+
+{{message}}
+
+</div>
+<div ng-controller="mycontroller">
+
+{{message}}<br/>
+
+<input type="text" ng-model="message"/><br/>
+<input type="text" ng-model="greeting"/><br/>
+{{greeting}}
+
+</div>
+
+
+<div>
+10+20= {{10+20}}
+</div>
+
+
+<div ng-controller="empController">
+
+Name:: {{employee.name}}<br/>
+Email:: {{employee.email}}<br/>
+DOB:: {{employee.dob}}<br/>
+
+<input type="text" ng-model="employee.name"/><br/>
+<input type="text" ng-model="employee.email"/><br/>
+<input type="text" ng-model="employee.dob"/><br/>
+
+photo:: <img ng-src="{{employee.logo}}" alt="{{employee.name+ 'IMG'}}"/>
+
+
+
+</div>
+
+
+<div ng-controller="emplistcontroller">
+Rows To Display <input type="number" step="1" min="0" max="3" ng-model="rowLimit"/>
+Order By  <select ng-model="sortcolumn">
+
+<option value="name">Sort By Name in ASC</option>
+<option value="-name">Sort By Name in Desc</option>
+<option value="dob">Sort By DOB in ASC</option>
+
+<option value="-dob">Sort By DOB in DESC</option>
+<option value="salary">Sort By salary in ASC</option>
+
+<option value="-salary">Sort By Salary in Desc</option>
+
+
+
+
+</select>
+<table border="2">
+   <tr>
+   <th>S.NO</th>
+   <th>Name</th>
+   <th>email</th>
+   <th>dob</th>
+      <th>gender</th>
+         <th>salary(number)</th>
+            <th>salary(currency)</th>
+   <tr/>
+   
+   
+   <tr ng-repeat="employee in employees |limitTo:rowLimit |orderBy: sortcolumn">
+   <td>{{$index+1}}</td>
+    <td> {{employee.name | uppercase}}</td>
+     <td>{{employee.email}}</td>
+      <td>{{employee.dob |date:"dd/MM/yyyy"}}</td>
+   <td>{{employee.gender | uppercase}}</td>
+   <td>{{employee.salary |number:2}}</td>
+   <td>{{employee.salary |currency}}</td>
+   </tr>
+
+
+
+</table>
+
+
+
+</div>
+
+<br/>
+<br/>
+<div ng-controller="technologycontroller">
+<table>
+
+<tr>
+<th>SNO</th>
+<th>Technology</th>
+<th>likes</th>
+<th>Dislikes</th>
+<th>Likes/Dislikes</th>
+
+</tr>
+<tr ng-repeat="technology in technologies">
+   <td>{{$index+1}}</td>
+    <td> {{technology.name}}</td>
+     <td>{{technology.likes}}</td>
+      <td>{{technology.dislikes}}</td>
+      
+       <td>
+       <input type="button" value="LIKE" ng-click="incrementlikes(technology)"/>/
+              <input type="button" value="DISLIKE" ng-click="incrementdislikes(technology)"/>
+       
+       
+       </td>
+   
+   </tr>
+
+
+
+</table>
+
+
+</div>
+
+
+</body>
+</html>
